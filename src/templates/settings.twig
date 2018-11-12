@@ -1,0 +1,45 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Groupie plugin for Craft CMS 3.x
+ *
+ * Groupie Settings.twig
+ *
+ * @author    Jesse Knowles
+ * @copyright Copyright (c) 2018 Jesse Knowles
+ * @link      http://www.jesseknowles.com
+ * @package   Groupie
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("kinoli\\groupie\\assetbundles\\groupie\\GroupieAsset") %}
+
+{{ forms.lightswitchField({
+    label: 'Multiple Groups',
+    instructions: 'You can allow your user signups to be assigned to multiple user groups upon registration.',
+    id: 'multipleGroups',
+    name: 'multipleGroups',
+    on: settings.multipleGroups
+    })
+}}
+
+{% set groupsOptions = [] %}
+{% for group in settings.groups %}
+    {% set groupsOptions = groupsOptions|merge([{
+      value: group.id,
+      label: group.name,
+    }]) %}
+{% endfor %}
+
+{{ forms.checkboxSelectField({
+    id: 'publicGroups',
+    name: 'publicGroups',
+    label: 'Public Groups',
+    showAllOption: true,
+    options: groupsOptions,
+    values: settings.publicGroups,
+    instructions: 'Select the groups you want to allow your front-end forms to register into.',
+}) }}
