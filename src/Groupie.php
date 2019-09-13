@@ -87,37 +87,39 @@ class Groupie extends Plugin
                 // get your hidden input value, 1 for true, 0 for false
                 $requestedUserGroups = Craft::$app->getRequest()->post('groups');
 
-                if (is_string($requestedUserGroups)) {
-                    $requestedUserGroups = [$requestedUserGroups];
-                }
+                if ($requestedUserGroups) {
+                    if (is_string($requestedUserGroups)) {
+                        $requestedUserGroups = [$requestedUserGroups];
+                    }
 
-                $settings = $this->getSettings();
+                    $settings = $this->getSettings();
 
-                if ($settings->multipleGroups || (!$settings->multipleGroups && count($requestedUserGroups) === 1)) {
+                    if ($settings->multipleGroups || (!$settings->multipleGroups && count($requestedUserGroups) === 1)) {
 
-                    if ($settings->publicGroups) 
-                    {
-                        $userId = $event->user->id;
-                        $legitGroups = array_intersect($requestedUserGroups, $settings->publicGroups);
-                        
-                        // make sure group still exists
-                        $nonGroups = [];
-                        foreach($legitGroups as $group) {
-                            if (!Craft::$app->userGroups->getGroupById($group))
-                            {
-                                $nonGroups[] = $group;
+                        if ($settings->publicGroups) 
+                        {
+                            $userId = $event->user->id;
+                            $legitGroups = array_intersect($requestedUserGroups, $settings->publicGroups);
+                            
+                            // make sure group still exists
+                            $nonGroups = [];
+                            foreach($legitGroups as $group) {
+                                if (!Craft::$app->userGroups->getGroupById($group))
+                                {
+                                    $nonGroups[] = $group;
+                                }
+                            }
+
+                            if (count($nonGroups)) {
+                                $legitGroups = array_diff($legit_groups, $nonGroups);
+                            }
+
+                            if ($legitGroups && $userId) {
+                                Craft::$app->getUsers()->assignUserToGroups($userId, $legitGroups);
                             }
                         }
 
-                        if (count($nonGroups)) {
-                            $legitGroups = array_diff($legit_groups, $nonGroups);
-                        }
-
-                        if ($legitGroups && $userId) {
-                            Craft::$app->getUsers()->assignUserToGroups($userId, $legitGroups);
-                        }
                     }
-
                 }
                 
             }
