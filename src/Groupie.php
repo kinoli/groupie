@@ -177,7 +177,8 @@ class Groupie extends Plugin
         return Craft::$app->view->renderTemplate(
             'groupie/settings',
             [
-                'settings' => $this->getSettings()
+                'settings' => $this->getSettings(),
+                'allGroups' => Craft::$app->userGroups->getAllGroups()
             ]
         );
     }

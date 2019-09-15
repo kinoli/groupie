@@ -41,7 +41,6 @@ class Settings extends Model
      */
     public $multipleGroups = false;
     public $publicGroups = [];
-    public $groups;
 
     function doFilter($group)
     {
@@ -57,8 +56,6 @@ class Settings extends Model
     public function init()
     {
         parent::init();
-
-        $this->groups = Craft::$app->userGroups->getAssignableGroups();
     }
 
     /**
