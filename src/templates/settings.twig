@@ -27,7 +27,7 @@
 }}
 
 {% set groupsOptions = [] %}
-{% for group in settings.groups %}
+{% for group in allGroups %}
     {% set groupsOptions = groupsOptions|merge([{
       value: group.id,
       label: group.name,
