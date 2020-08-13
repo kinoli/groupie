@@ -37,4 +37,24 @@ Acceptable post parameters in your frontend forms should look like this...
 }
 ```
 
+So your form fields could look similar this...
+```
+<input type="hidden" name="groups" value="2">
+
+// or
+
+<select type="groups">
+  <option value="1">Admin</option>
+  <option value="2">Manager</option>
+  <option value="3">Editor</option>
+</select>
+
+// or
+
+<input type="checkbox" name="groups[]" value="1">
+<input type="checkbox" name="groups[]" value="2">
+<input type="checkbox" name="groups[]" value="3">
+<input type="checkbox" name="groups[]" value="4">
+```
+
 Brought to you by [Jesse Knowles](http://www.jesseknowles.com)
