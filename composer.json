@@ -2,7 +2,7 @@
     "name": "kinoli/groupie",
     "description": "Assign users to specific user groups upon registration. Especially useful for front-end signup forms",
     "type": "craft-plugin",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "keywords": [
         "craft",
         "cms",
