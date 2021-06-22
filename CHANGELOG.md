@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.7 - 2021-06-21
+### Update
+- revert last change
+
 ## 1.0.6 - 2021-06-21
 ### Update
 - fix namespace issue for composer 2
